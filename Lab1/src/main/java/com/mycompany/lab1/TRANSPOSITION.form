@@ -34,7 +34,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnMaHoa" min="-2" pref="82" max="-2" attributes="0"/>
-                      <EmptySpace pref="203" max="32767" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                       <Component id="btnGiaiMa" min="-2" pref="82" max="-2" attributes="0"/>
                   </Group>
                   <Component id="txtBanRo" alignment="0" max="32767" attributes="0"/>
@@ -75,7 +75,7 @@
                   <Component id="btnGiaiMa" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="btnMaHoa" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

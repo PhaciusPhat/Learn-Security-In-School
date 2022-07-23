@@ -6,24 +6,14 @@ package com.mycompany.lab1;
 
 /**
  *
- * @author yusuk
+ * @author yusuki
  */
-public class PLAYFAIL extends javax.swing.JFrame {
+public class TRANSPOSITION extends javax.swing.JFrame {
 
-    char pf[][] = {
-        {'M', 'O', 'N', 'A', 'R'},
-        {'C', 'H', 'Y', 'B', 'D'},
-        {'E', 'F', 'G', 'I', 'K'},
-        {'L', 'P', 'Q', 'S', 'T'},
-        {'U', 'V', 'W', 'X', 'Z'},};
-
-    
-    
-    
     /**
-     * Creates new form PLAYFAIL
+     * Creates new form TRANSPOSITION
      */
-    public PLAYFAIL() {
+    public TRANSPOSITION() {
         initComponents();
     }
 
@@ -81,7 +71,7 @@ public class PLAYFAIL extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                         .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtBanRo)
                     .addComponent(txtKhoa)
@@ -111,126 +101,72 @@ public class PLAYFAIL extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMaHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String timViTri(char a) {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (pf[i][j] == a) {
-                    return i + "" + j;
-                }
-            }
-        }
-        return "";
-    }
-
-    private String thayThe(char a, char b) {
-        String vta = timViTri(a);
-        String vtb = timViTri(b);
-        char x, y;
-        if (vta.charAt(0) == vtb.charAt(0)) {
-            x = pf[vta.charAt(0) - '0'][((vta.charAt(1) - '0') + 1) % 5];
-            y = pf[vtb.charAt(0) - '0'][((vtb.charAt(1) - '0') + 1) % 5];
-            return x + "" + y;
-        }
-        if (vta.charAt(1) == vtb.charAt(1)) {
-            x = pf[((vta.charAt(0) - '0') + 1) % 5][vta.charAt(1) - '0'];
-            y = pf[((vtb.charAt(0) - '0') + 1) % 5][vtb.charAt(1) - '0'];
-            return x + "" + y;
-        }
-        x = pf[vta.charAt(0) - '0'][vtb.charAt(1) - '0'];
-        y = pf[vtb.charAt(0) - '0'][vta.charAt(1) - '0'];
-        return x + "" + y;
-    }
-
-    private String mahoa(String banRo) {
-        int n = banRo.length();
-        int i = 0;
-        String banMa = "";
-        char a, b;
-        while (i < n) {
-            if (i == n - 1) {
-                a = banRo.charAt(i);
-                b = 'X';
-                ++i;
-            } else {
-                a = banRo.charAt(i);
-                b = banRo.charAt(i + 1);
-
-                if (a == b) {
-                    b = 'X';
-                    ++i;
-                } else {
-                    i += 2;
-                }
-            }
-            banMa += thayThe(a, b);
-        }
-        return banMa;
-    }
-
-
     private void btnMaHoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaHoaActionPerformed
         // TODO add your handling code here:
-        String banRo = txtBanRo.getText();
-        banRo = banRo.toUpperCase();
-        banRo = banRo.replace('J', 'I');
-        String banMa = mahoa(banRo);
-        txtBanMa.setText(banMa);
+        // TODO add your handling code here:
+        String k = txtKhoa.getText();
+        String ks[] = new String[6];
+        ks = k.split(",");
+        int key[] = new int[6];
+        for (int i = 0; i < 6; i++) {
+            key[i] = Integer.valueOf(ks[i]) - 1;
+        }
+        String sa = txtBanRo.getText();
+        String kq = "";
+        int na = sa.length();
+        int d = 0;
+        int c;
+        String s = "";
+        int thieu = 6 - na % 6;
+        for (int i = 0; i < thieu; i++) {
+            sa += " ";
+        }
+        while (d < na) {
+            c = d + 6;
+            s = sa.substring(d, c);
+            for (int i = 0; i < 6; i++) {
+                kq += s.charAt(key[i]);
+            }
+            d += 6;
+        }
+        txtBanMa.setText(kq);
     }//GEN-LAST:event_btnMaHoaActionPerformed
-
-    private String thayTheNguoc(char a, char b) {
-        String vta = timViTri(a);
-        String vtb = timViTri(b);
-        char x, y;
-        if (vta.charAt(0) == vtb.charAt(0)) {
-            x = pf[vta.charAt(0) - '0'][((vta.charAt(1) - '0') - 1 + 5) % 5];
-            y = pf[vtb.charAt(0) - '0'][((vtb.charAt(1) - '0') - 1 + 5) % 5];
-            return x + "" + y;
-        }
-        if (vta.charAt(1) == vtb.charAt(1)) {
-            x = pf[((vta.charAt(0) - '0') - 1 + 5) % 5][vta.charAt(1) - '0'];
-            y = pf[((vtb.charAt(0) - '0') - 1 + 5) % 5][vtb.charAt(1) - '0'];
-            return x + "" + y;
-        }
-        x = pf[vta.charAt(0) - '0'][vtb.charAt(1) - '0'];
-        y = pf[vtb.charAt(0) - '0'][vta.charAt(1) - '0'];
-        return x + "" + y;
-    }
-
-    private String giaiMa(String banMa) {
-        int n = banMa.length();
-        String banRo = "";
-        char a, b;
-        for (int i = 0; i < n; i += 2) {
-            a = banMa.charAt(i);
-            b = banMa.charAt(i + 1);
-            banRo += thayTheNguoc(a, b);
-        }
-        return banRo;
-    }
 
     private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
         // TODO add your handling code here:
-        String banMa = txtBanMa.getText();
-        String banRo = giaiMa(banMa);
-        int n = banRo.length();
-        String br = "";
-        for (int i = 0; i < n - 2; i+=2) {
-            if (banRo.charAt(i) == banRo.charAt(i + 2)) {
-                br += banRo.charAt(i);
-            } else {
-                br += banRo.charAt(i) + "" + banRo.charAt(i + 1);
-            }
+        // TODO add your handling code here:
+        String k = txtKhoa.getText();
+        String ks[] = new String[6];
+        ks = k.split(",");
+        int key[] = new int[6];
+        for (int i = 0; i < 6; i++) {
+            key[i] = Integer.valueOf(ks[i]) - 1;
         }
-        br += banRo.charAt(n - 2);
-        
-            br += banRo.charAt(n - 1);
-        txtBanRo.setText(br);
+        int key1[] = new int[6];
+        for (int i = 0; i < 6; i++) {
+            key1[key[i]] = i;
+        }
+        String sa = txtBanMa.getText();
+        String kq = "";
+        int na = sa.length();
+        int d = 0;
+        int c;
+        String s = "";
+        while (d < na) {
+            c = d + 6;
+            s = sa.substring(d, c);
+            for (int i = 0; i < 6; i++) {
+                kq += s.charAt(key1[i]);
+            }
+            d += 6;
+        }
+        txtBanMa.setText(kq);
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
     /**
@@ -250,20 +186,20 @@ public class PLAYFAIL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PLAYFAIL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRANSPOSITION.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PLAYFAIL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRANSPOSITION.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PLAYFAIL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRANSPOSITION.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PLAYFAIL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TRANSPOSITION.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PLAYFAIL().setVisible(true);
+                new TRANSPOSITION().setVisible(true);
             }
         });
     }
